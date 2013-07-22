@@ -20,7 +20,7 @@ The Directory serves as a hub for the remainder of the applications by associati
 
 ### Events
 
-The Events application provides a simple way to create and track upcoming events, such as conferences.
+The Events application provides a simple way to create and track upcoming events, such as conferences. This can be adapted to pertain to meetings or any other time-related occurrence.
 
 ### Nanopublications
 
