@@ -36,5 +36,5 @@ The Task Manager application provides a way for individuals to track tasks assig
 
 ## Data Storage
 
-The resources that are created by these applications should be stored in a separate directory so that the applications can be updated without effecting the underlying data. 
+The resources that are created by these applications should be stored in a separate directory so that the applications can be updated without effecting the underlying data. We recommend a file path of /data.
 
