@@ -1,0 +1,41 @@
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rif: <http://www.w3.org/2007/rif#> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix skosxl: <http://www.w3.org/2008/05/skos-xl#> .
+@prefix cc: <http://creativecommons.org/ns#> .
+@prefix wdr: <http://www.w3.org/2007/05/powder#> .
+@prefix void: <http://rdfs.org/ns/void#> .
+@prefix msg: <http://www.openrdf.org/rdf/2011/messaging#> .
+@prefix calli: <http://callimachusproject.org/rdf/2009/framework#> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix dcterms: <http://purl.org/dc/terms/>.
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix geo: <http://www.geonames.org/ontology#> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix ex: <http://example.com/YourSchemaHere#> .
+@prefix : <#> .
+
+ex:transmittedBy
+    rdf:type rdf:Property ;
+	rdfs:isDefinedBy <http://example.com/YourSchemaHere#> ;
+	rdfs:label "transmitted by" ;
+	rdfs:comment "Indicates the object of the triple was carried/moved/transmitted by the subject."
+.
+
+foaf:knows
+    rdf:type rdf:Property ;
+    rdfs:isDefinedBy <http://xmlns.com/foaf/0.1/> ;
+    rdfs:label "knows" ;
+    rdfs:comment "A person known by this person (indicating some level of reciprocated interaction between the parties)."
+.
+
+rdf:type
+    rdf:type rdf:Property ;
+    rdfs:isDefinedBy <http://www.w3.org/1999/02/22-rdf-syntax-ns#> ;
+    rdfs:label "type" ;
+    rdfs:comment "The subject is an instance of a class." 
+.

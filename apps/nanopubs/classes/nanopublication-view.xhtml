@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:calli="http://callimachusproject.org/rdf/2009/framework#"
+    xmlns:nano="http://example.com/nanoSchema/"
+    xmlns:oa="http://www.w3.org/ns/oa#"
+    xmlns:cnt="http://www.w3.org/2011/content#"
+    xmlns:prov="http://www.w3.org/ns/prov#"
+    xmlns:np="http://www.nanopub.org/nschema#">
+<head>
+    <title resource="?this">{rdfs:label}</title>
+    <link rel="edit-form" href="?edit" />
+    <link rel="comments" href="?discussion" />
+    <link rel="version-history" href="?history" />
+    
+    <script src="https://www.google.com/jsapi" type="text/javascript"></script>
+    <script type="text/javascript" src="../js/nanopublication-view.js"></script>
+</head>
+<body resource="?this">
+    <h1 property="rdfs:label" />
+    <div id="sidebar">
+        <aside>
+            <h3>Votes</h3>
+            <p>
+                <a href="javascript:void(0)" id="up" onclick="voteHandler($(this).attr('id')); return false"><i class="icon icon-thumbs-up" /> Agree</a> (<span id="upVoteCount" />) | 
+                <a href="javascript:void(0)" id="down" onclick="voteHandler($(this).attr('id')); return false"><i class="icon icon-thumbs-down" /> Disagree</a> (<span id="downVoteCount" />)
+            </p>
+            <h5><span id="loading-image">Casting vote...</span></h5>
+            <h4>Details <a href="vascript:void(0)" onclick="toggleStats(); return false"><i id="votingStatsIcon" class="icon icon-zoom-in" /></a></h4>
+            <div id="votingStats" class="initHide">
+                <h5>Agree:</h5>
+                <ul id="agreeList" />
+                <h5>Disagree:</h5>
+                <ul id="disagreeList" />
+            </div>
+        </aside>
+        <aside>
+            <h3>Data</h3>
+            <a href="{np:hasAssertion}"><i class="icon icon-download" /> Download Turtle</a>
+        </aside>
+        <aside>
+            <h3>Provenance</h3>
+            <div rel="prov:wasGeneratedBy" resource="?prov">
+                <p><strong>Author:</strong> <span rel="prov:wasAssociatedWith" resource="?user"><a href="{?user}">{rdfs:label}</a></span></p>
+                <p><strong>Modified:</strong> <time class="datetime" property="prov:startedAtTime" /></p>
+            </div>
+        </aside>
+    </div>
+    <div id="content">
+        <div class="row-fluid">
+            <h3>Nanopublication</h3>
+            <div class="span2">
+                <div rel="nano:hasSubject" resource="?subject">
+                    <a href="{?subject}"><span style="word-wrap: break-word;" property="skos:prefLabel" /></a>
+                </div>
+            </div>
+            <div class="span2">
+                <div rel="nano:hasPredicate" resource="?predicate">
+                    <a href="{?predicate}"><span style="word-wrap: break-word;" property="rdfs:label" /></a>
+                </div>
+            </div>
+            <div class="span2">
+                <div rel="nano:hasObject" resource="?object">
+                    <a href="{?object}"><span style="word-wrap: break-word;" property="skos:prefLabel" /></a>
+                </div>
+            </div>
+        </div>
+        <div id="annotationHeader" class="row-fluid">
+            <h3>Annotations</h3>
+            <ul id="annotationList" rel="nano:hasSupporting" resource="?annotation" class="optional">
+                <li>
+                    <h5><a href="{?annotation}">{rdfs:label}</a></h5>
+                    <div rel="oa:hasBody" resource="?oaBody">
+                        <span property="cnt:chars" />
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:calli="http://callimachusproject.org/rdf/2009/framework#"
+    xmlns:nano="http://example.com/nanoSchema/"
+    xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:oa="http://www.w3.org/ns/oa#"
+    xmlns:np="http://www.nanopub.org/nschema#">
+<head>
+    <title resource="?this">{rdfs:label}</title>
+    <script type="text/javascript" src="../js/nanopublication-edit.js"></script>
+</head>
+<body resource="?this">
+    <h1 property="rdfs:label" />
+    <h2>Nanopublication</h2>
+    <form method="POST" action="" enctype="application/sparql-update" resource="?this">
+        <fieldset>
+            <div class="row-fluid">
+                <div class="span12">
+                    <h4>File:</h4>
+                    <p><a href="{np:hasAssertion}"><span property="np:hasAssertion" /></a></p>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span2" rel="nano:hasSubject" resource="?subject">
+                    <h4>Subject</h4>
+                    <a href="{?subject}"><span style="word-wrap: break-word;" property="skos:prefLabel" /></a>
+                </div>
+                <div class="span2" rel="nano:hasPredicate" resource="?predicate">
+                    <h4>Predicate</h4>
+                    <a href="{?predicate}"><span style="word-wrap: break-word;" property="rdfs:label" /></a>
+                </div>
+                <div class="span2" rel="nano:hasObject" resource="?object">
+                    <h4>Object</h4>
+                    <a href="{?object}"><span style="word-wrap: break-word;" property="skos:prefLabel" /></a>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="annotation" class="control-group" dropzone="link s:text/uri-list"
+                            ondrop="return calli.insertResource(event)">
+    				    <h2 class="control-label">Annotations
+                            <div class="btn-group">
+                                <a title="Bookmark" class="btn" href="/rdf/2013/annotations/annotations/?create=/rdf/2013/annotations/classes/Annotation&amp;target={?this}?view&amp;motivation=Bookmarking"
+                                        onclick="return calli.createResource(event)">
+                                    <i class="icon-bookmark" href="/rdf/2013/annotations/annotations/?create=/rdf/2013/annotations/classes/Annotation&amp;target={?this}?view&amp;motivation=Bookmarking" />
+                                </a>
+                                <a title="Tag" class="btn" href="/rdf/2013/annotations/annotations/?create=/rdf/2013/annotations/classes/Annotation&amp;target={?this}?view&amp;motivation=Tagging" 
+                                        onclick="return calli.createResource(event)">
+                                    <i class="icon-tag" href="/rdf/2013/annotations/annotations/?create=/rdf/2013/annotations/classes/Annotation&amp;target={?this}?view&amp;motivation=Tagging" />
+                                </a>
+                                <a title="Comment" class="btn" href="/rdf/2013/annotations/annotations/?create=/rdf/2013/annotations/classes/Annotation&amp;target={?this}?view&amp;motivation=Commenting" 
+                                        onclick="return calli.createResource(event)">
+                                    <i class="icon-comment" href="/rdf/2013/annotations/annotations/?create=/rdf/2013/annotations/classes/Annotation&amp;target={?this}?view&amp;motivation=Commenting" />
+                                </a>
+                                <a title="Classification" class="btn" href="/rdf/2013/annotations/annotations/?create=/rdf/2013/annotations/classes/Annotation&amp;target={?this}?view&amp;motivation=Classifying" 
+                                        onclick="return calli.createResource(event)">
+                                    <i class="icon-folder-open" href="/rdf/2013/annotations/annotations/?create=/rdf/2013/annotations/classes/Annotation&amp;target={?this}?view&amp;motivation=Classifying" />
+                                </a>
+                                <a title="Description" class="btn" href="/rdf/2013/annotations/annotations/?create=/rdf/2013/annotations/classes/Annotation&amp;target={?this}?view&amp;motivation=Describing" 
+                                        onclick="return calli.createResource(event)">
+                                    <i class="icon-file" href="/rdf/2013/annotations/annotations/?create=/rdf/2013/annotations/classes/Annotation&amp;target={?this}?view&amp;motivation=Describing" />
+                                </a>
+                            </div>
+                        </h2>
+                        <div rel="nano:hasSupporting" class="vbox controls">
+    					    <span about="?annotation" typeof="/rdf/2013/annotations/Annotation" class="ui-state-highlight ui-corner-all">
+    						    <a onclick="editBody('{?annotation}?edit'); return false">{rdfs:label}</a>
+                                <a href="{?annotation}" title="Remove Annotation" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+    					    </span>
+                        </div>
+                    </div>
+				</div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div class="form-actions">
+                        <button type="submit" class="btn btn-primary">Save</button>
+                        <button type="button" onclick="window.location.replace('?view')" class="btn">Cancel</button>
+                        <button type="button" onclick="calli.deleteResource(event)" class="btn btn-danger">Delete</button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

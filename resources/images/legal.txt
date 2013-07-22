@@ -1,0 +1,8 @@
+Credits:
+--------
+
+iphone-app-paper blank images are copyright http://www.graphicsfuel.com/ and released under a Creative Commons Attribution 3.0 License.
+
+MovingBoxes JQuery plugin released under a GNU GPL v3 license.  See https://github.com/CSS-Tricks/MovingBoxes/wiki
+
+Thanks, folks!

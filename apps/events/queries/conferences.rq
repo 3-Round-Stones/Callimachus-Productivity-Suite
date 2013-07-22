@@ -1,0 +1,75 @@
+#
+# @Cache-Control: no-store
+# @view 
+#
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX vcard: <http://www.w3.org/2006/vcard/ns#>
+PREFIX ical: <http://www.w3.org/2002/12/cal/icaltzd#>
+PREFIX gr: <http://purl.org/goodrelations/v1#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX calli: <http://callimachusproject.org/rdf/2009/framework#>
+PREFIX : <https://wiki.3roundstones.com/>
+
+SELECT DISTINCT ?event ?name ?addrLabel ?streetAddr ?extAddress ?zipCode ?locality 
+    ?region ?country ?url ?sdate ?edate ?ddate (group_concat(distinct ?stypeLabel ; separator = ", ") AS ?stypeFinal) ?fees ?travel ?statusLabel {
+  
+  ?event a <../../../resources/classes/Event>
+    ; rdfs:label ?name .
+
+  OPTIONAL {
+    ?event a <../../../resources/classes/Event> .
+    
+    OPTIONAL {
+      ?event ical:dtstart ?sdate .
+    }
+    OPTIONAL {
+      ?event ical:dtend ?edate .
+    }
+    OPTIONAL {
+      ?event gr:hasCurrencyValue ?fees
+    }
+    OPTIONAL {
+      ?event calli:travelExpenses ?travel .
+    }
+    OPTIONAL {
+      ?event vcard:adr ?adr .
+        OPTIONAL {
+          ?adr rdfs:label ?addrLabel .
+        }
+        OPTIONAL {
+          ?adr vcard:street-address ?streetAddr .
+        }
+        OPTIONAL {
+          ?adr vcard:extended-address ?extAddress .
+        }
+        OPTIONAL {
+          ?adr vcard:locality ?locality .
+        }
+        OPTIONAL {
+          ?adr vcard:region ?region .
+        }
+        OPTIONAL {
+          ?adr vcard:postal-code ?zipCode .
+        }
+        OPTIONAL {
+          ?adr vcard:country-name ?country .
+        }
+        OPTIONAL {
+          ?adr vcard:url ?url .
+        }
+    }
+    OPTIONAL {
+      ?event ical:due ?ddate .
+    }
+    OPTIONAL {
+      ?event ical:relatedTo ?stype .
+      ?stype skos:prefLabel ?stypeLabel .
+    }
+    OPTIONAL {
+      ?event ical:status ?status .
+      ?status skos:prefLabel ?statusLabel .
+    }
+  } FILTER ( ?edate > strdt("$now", xsd:date) )
+} GROUP BY ?event ?name ?addrLabel ?streetAddr ?extAddress ?zipCode ?locality ?region ?country ?url ?sdate ?edate ?ddate ?fees ?travel ?statusLabel

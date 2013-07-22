@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:calli="http://callimachusproject.org/rdf/2009/framework#"
+    xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+    xmlns:gr="http://purl.org/goodrelations/v1#"
+    xmlns:cal="http://www.w3.org/2002/12/cal/icaltzd#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+<head>
+    <title>Create New Event</title>
+</head>
+<body>
+    <h1>New Event</h1>
+    <form method="POST" action="" enctype="application/rdf+xml" typeof=""
+            onsubmit="return calli.saveResourceAs(event,calli.slugify($('#name').val()))">
+        <div class="hbox">
+            <fieldset>
+                <div class="control-group">
+                    <label for="name" class="control-label">Event Name</label>
+                    <div class="controls">
+                        <input id="name" type="text" class="auto-expand" value="{rdfs:label}" required="required" autofocus="autofocus" />
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="description" class="control-label">Description</label>
+                    <div class="controls">
+                        <textarea id="description" class="span5" rows="4">{rdfs:comment}</textarea>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="conferenceUrl" class="control-label">URL</label>
+                    <div class="controls">
+                        <input id="conferenceUrl" type="url" class="span5" value="{rdfs:seeAlso}" placeholder="http://"></input>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="startDate" class="control-label">Start date</label>
+                    <div class="controls">
+    				    <input id="startDate" type="date" datatype="xsd:date" value="{cal:dtstart}" />
+                        <label for="endDate" style="display:inline-block">Until</label>
+        			    <input id="endDate" type="date" datatype="xsd:date" value="{cal:dtend}" />
+                    </div>
+    			</div>
+                <div class="control-group">
+                	<label for="subDeadline" class="control-label">Submission deadline</label>
+                    <div class="controls">
+    				    <input id="subDeadline" type="date" datatype="xsd:date" value="{cal:due}" />
+                    </div>
+    			</div>
+                <div class="control-group">
+                    <label for="adr" class="control-label">Venue location</label>
+        		    <div id="adr" rel="vcard:adr" class="controls">
+        		        <div typeof="vcard:Address">
+                            <input type="url" class="span5" placeholder="http://" value="{vcard:url}" />
+        			        <div class="hbox">
+        					    <div class="vbox">
+                                    <input type="text" placeholder="venue name" value="{rdfs:label}" />
+        						    <input type="text" placeholder="street address" value="{vcard:street-address}" />
+        						    <input type="text" placeholder="extended address" value="{vcard:extended-address}" />
+        						    <input type="text" placeholder="po box" value="{vcard:post-office-box}" />
+        					    </div>
+        					    <div class="vbox">
+        						    <input type="text" placeholder="city" value="{vcard:locality}" />
+        						    <input type="text" placeholder="state or province" value="{vcard:region}" />
+        						    <input type="text" placeholder="postal code" value="{vcard:postal-code}" />
+        						    <input type="text" placeholder="country" value="{vcard:country-name}" />
+        					    </div>
+        			        </div>
+                        </div>
+    	            </div>
+    		    </div>
+            </fieldset>
+            <fieldset>
+                <div class="control-group">
+                    <label for="subType" class="control-label">Submission Type</label>
+                    <div id="subType" class="controls">
+                        <label class="checkbox" rel="cal:relatedTo" resource="?type">
+                            <input type="checkbox" name="attendees" checked="checked" />
+                            <span rev="calli:hasComponent" resource="../concepts/submission-types/" property="skos:prefLabel" />
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="cost" class="control-label">Conference/Sponsorship Fees</label>
+                    <div class="controls">
+                        <div class="input-prepend">
+                            <span class="add-on">$</span>
+                            <input id="cost" type="number" min="0" step="any" datatype="xsd:decimal" class="auto-expand" value="{gr:hasCurrencyValue}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="travel" class="control-label">Travel and Expenses</label>
+                    <div class="controls">
+                        <div class="input-prepend">
+                            <span class="add-on">$</span>
+                            <input id="travel" type="number" min="0" step="any" datatype="xsd:decimal" class="auto-expand" value="{calli:travelExpenses}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="attendees" class="control-label">Attendees</label>
+                    <div id="attendees" class="controls">
+                        <label class="checkbox" rel="cal:attendee" resource="?concept">
+                            <input type="checkbox" name="attendees" checked="checked" />
+                            <span rev="calli:hasComponent" resource="/auth/digest-users/" property="rdfs:label" />
+                        </label>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <label for="status" class="control-label">Status</label>
+                    <div id="status" class="controls">
+                        <label class="radio" rel="cal:status" resource="?status">
+                            <input type="radio" name="status" checked="checked" />
+                            <span rev="calli:hasComponent" resource="../concepts/event-status/" property="skos:prefLabel" />
+                        </label>
+                    </div>
+                </div>
+            </fieldset>
+        </div>
+        <fieldset class="form-actions">
+            <button type="submit" class="btn btn-success">Create</button>
+        </fieldset>
+    </form>
+</body>
+</html>

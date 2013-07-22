@@ -1,0 +1,84 @@
+/* Moving Boxes demo CSS */
+
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('PT Sans'), local('PTSans-Regular'), url(../fonts/7YGmE4Ls5b94ct65u07hVQLUuEpTyoUstqEm5AMlJo4.woff) format('woff');
+}
+@font-face {
+  font-family: 'PT Sans';
+  font-style: normal;
+  font-weight: 700;
+  src: local('PT Sans Bold'), local('PTSans-Bold'), url(../fonts/0XxGQsSc1g4rdRdjJKZrNL3hpw3pgy2gAi-Ip7WPMi0.woff) format('woff');
+}
+
+* { 
+  margin: 0; 
+  padding: 0; 
+}
+
+body { 
+  font: 16px/1.4 'PT Sans', sans-serif;
+}
+
+.applist-title {
+  text-align: center;
+  color: #be6000;
+  /*text-transform: uppercase; */
+  padding: 30px 0 0;
+  font-size: 60px;
+}
+
+/* Navigation bar */
+.main-nav { 
+  display: block; 
+  text-align: center; 
+  border-bottom: 2px solid #be6000;
+  margin: 0 0 20px 0;
+  padding: 0 0 10px 0;
+}
+
+.main-nav a { 
+  text-decoration: none;
+  color: #3e63ec;
+  font-size: 18px;
+  margin: 0 8px;
+}
+.main-nav a:hover {
+  color: black;
+  border-bottom: 2px solid black;
+}
+
+/* Moving Boxes title image wrapper */
+#title { 
+  text-align: center; 
+}
+#title img { 
+  border: 0; 
+}
+
+/* Panel images */
+.mb-inside img { width: 100%; }
+
+/* height of the placeholder until image completely loads - needed for
+   webkit browsers, add this only if you don't want the height animation
+   on startup. 326px measures the height of the current image when enlarged 
+*/
+#slider-two .current img { /* height: 326px; */ }
+
+/* Panel links */
+.mb-inside a { color: #333; text-decoration: none; border-bottom: 1px dotted #ccc; }
+.mb-inside a:hover { border-bottom: 1px solid #999; }
+
+/* Add/remove panels buttons */
+.buttons { padding: 5px 10px; text-align: center; }
+
+/* Direct link styling */
+.dlinks { 
+  text-align: center;
+  margin: 0 0 20px 0;
+}
+.dlinks * {
+  vertical-align: middle;
+}

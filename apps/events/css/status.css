@@ -1,0 +1,15 @@
+/*
+* Status Color Coding
+*/
+.attendingRowColor {
+    font-weight: bold;
+    background-color: #86bf84;
+}
+        
+.toDiscussRowColor {
+    background-color: #f6dc76;   
+}
+        
+.rejectedRowColor {
+    background-color: #7c0f0f;   
+}

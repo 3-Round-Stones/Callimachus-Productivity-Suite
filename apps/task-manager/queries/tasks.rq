@@ -1,0 +1,22 @@
+#
+# @Cache-Control: 
+# @infer true
+# @view 
+#
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ical: <http://www.w3.org/2002/12/cal/icaltzd#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?taskLink ?name ?priorityLabel ?statusLabel {
+    ?taskLink a <../../resources/classes/Task>
+        ; rdfs:label ?name
+        ; ical:priority ?priority
+        ; ical:status ?status .
+
+    ?priority skos:prefLabel ?priorityLabel .
+
+    ?status skos:prefLabel ?statusLabel .
+        
+}

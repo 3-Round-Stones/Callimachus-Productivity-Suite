@@ -1,0 +1,34 @@
+#
+# @Cache-Control: 
+# @infer true
+# @view 
+#
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX prov: <http://www.w3.org/ns/prov#>
+PREFIX oa: <http://www.w3.org/ns/oa#>
+PREFIX nano: <http://example.com/nanoSchema/>
+
+SELECT ?nano ?label ?creator (COUNT(?anno) as ?totalAnnos) (COUNT(?upVoteUsers) AS ?upVotes) 
+    (COUNT(?downVoteUsers) AS ?downVotes){
+ ?nano a <../classes/Nanopublication> 
+    ; rdfs:label ?label
+    ; prov:wasGeneratedBy ?prov .
+
+ OPTIONAL {
+    ?nano oa:targetOf ?anno .
+ }
+
+ OPTIONAL {
+    ?nano nano:upVotedBy ?upVoteUsers .
+ }
+
+ OPTIONAL {
+    ?nano nano:downVotedBy ?downVoteUsers .
+ }
+
+ ?prov prov:wasAssociatedWith ?user .
+ ?user rdfs:label ?creator .
+
+} GROUP BY ?nano ?label ?creator

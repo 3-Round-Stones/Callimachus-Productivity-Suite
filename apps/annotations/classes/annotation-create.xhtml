@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:owl="http://www.w3.org/2002/07/owl#"
+    xmlns:calli="http://callimachusproject.org/rdf/2009/framework#"
+    xmlns:oa="http://www.w3.org/ns/oa#"
+    xmlns:cnt="http://www.w3.org/2011/content#"
+    xmlns:dc="http://purl.org/dc/elements/1.1/"
+    xmlns:dctypes="http://purl.org/dc/dcmitype/"
+    xmlns:vcard="http://www.w3.org/2006/vcard/ns#">
+<head>
+    <title>New Annotation</title>
+    <link rel="stylesheet" type="text/css" href="../css/annotation-create.css" />
+    
+    <script type="text/javascript" src="../js/generate-uuid.js"></script>
+    <script type="text/javascript" src="../js/annotation-create-edit.js"></script>
+</head>
+<body>
+    <h1>New <span id="motivationHeader"></span>Annotation</h1>
+    <form id="pageForm" method="POST" action="" enctype="application/rdf+xml" typeof="oa:Annotation"
+            onsubmit="submitHandler(event); return true">
+        <fieldset>
+            <div class="row-fluid">
+                <div class="span10 iFrameStretch12NoWell">
+                    <p>By default, annotations are assigned a label of a timestamp when they were created. 
+                    If you wish to assign a different label, simply click the button next to "Label" below
+                    and enter the desired label.</p>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span4 well well-small iFrameStretch6">
+                    <div class="control-group">
+                        <label class="control-label" for="label">Label <button href="#" onclick="toggleControls(this); return false" class="btn btn-info"><i class="icon icon-white icon-chevron-down" /></button></label>
+                        <div class="controls hide">
+                            <input type="text" id="label" value="{rdfs:label}" />
+                        </div>
+                    </div>
+                </div>
+                <div class="span4 well well-small iFrameStretch6">
+                    <div id="bookmarkDiv" class="control-group">
+                        <label class="control-label">Comments <button class="btn btn-info"
+                            onclick="return calli.addResource(event, '#bookmarkBodies')"><i class="icon-comment icon-white" /></button></label>
+                        <div id="bookmarkBodies" rel="oa:hasBody" class="controls">
+                            <div resource="?bookmarkBody" typeof="cnt:ContentAsText dctypes:Text">
+                                <div property="dc:format" content="text/plain" />
+                                <div class="controls">
+                                    <textarea class="span10" rows="3" placeholder="General comment or description...">{cnt:chars}</textarea>
+                                    <a href="{?bookmarkBody}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="classificationDiv" dropzone="link s:text/uri-list" ondrop="return calli.insertResource(event)" class="initHide control-group">
+                        <label class="control-label">Classifications <button class="btn btn-info" href="/productivity-suite/apps/annotations/concepts/" title="Browse classifications" onclick="return calli.selectResource(event)"><i class="icon-folder-open icon-white" /></button></label>
+                        <div id="classificationBodies" rel="oa:hasBody" class="controls">
+                            <span resource="?classificationBody" typeof="skos:Concept" class="ui-state-highlight ui-corner-all">
+                                <span property="skos:prefLabel" />
+                                <a href="{?classificationBody}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+                            </span>
+                        </div>
+                    </div>
+                    <div id="commentDiv" class="initHide control-group">
+                        <label class="control-label">Comments <button class="btn btn-info"
+                            onclick="return calli.addResource(event, '#commentBodies')"><i class="icon-comment icon-white" /></button></label>
+                        <div id="commentBodies" rel="oa:hasBody" class="controls">
+                            <div resource="?commentBody" typeof="cnt:ContentAsText dctypes:Text">
+                                <div property="dc:format" content="text/plain" />
+                                <div class="controls">
+                                    <textarea class="span10" rows="3" placeholder="General comment or description...">{cnt:chars}</textarea>
+                                    <a href="{?commentBody}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="highlightDiv" class="initHide control-group">
+                        <label class="control-label">Comments <button class="btn btn-info"
+                            onclick="return calli.addResource(event, '#highlightBodies')"><i class="icon-comment icon-white" /></button></label>
+                        <div id="highlightBodies" rel="oa:hasBody" class="controls">
+                            <div resource="?highlightBody" typeof="cnt:ContentAsText dctypes:Text">
+                                <div property="dc:format" content="text/plain" />
+                                <div class="controls">
+                                    <textarea class="span10" rows="3" placeholder="General comment or description...">{cnt:chars}</textarea>
+                                    <a href="{?highlightBody}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="identificationDiv" class="initHide control-group">
+                        <label class="control-label">Identifications <button class="btn btn-info"
+                            onclick="return calli.addResource(event, '#identificationBodies')"><i class="icon-info-sign icon-white" /></button></label>
+                        <div id="identificationBodies" rel="oa:hasBody" class="controls">
+                            <div resource="?identificationBody" typeof="cnt:ContentAsText dctypes:Text">
+                                <div property="dc:format" content="text/plain" />
+                                <div class="controls">
+                                    <input type="url" placeholder="http://" value="{cnt:chars}" />
+                                    <a href="{?identificationBody}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="tagDiv" class="initHide control-group">
+                        <label class="control-label">Tags <button class="btn btn-info" title="Free text tag"
+                            onclick="$('#semTagBodies').hide(); $('#tagBodies').show(); return calli.addResource(event, '#tagBodies')"><i class="icon-tag icon-white" /></button>
+                            <button class="btn btn-info" title="Controlled vocabulary tag"
+                                onclick="$('#tagBodies').hide(); $('#semTagBodies').show(); return calli.addResource(event, '#semTagBodies')"><i class="icon-globe icon-white" /></button>
+                        </label>
+                        <div id="tagBodies" rel="oa:hasBody" class="controls">
+                            <div resource="?tagBody" typeof="cnt:ContentAsText dctypes:Text oa:Tag">
+                                <div property="dc:format" content="text/plain" />
+                                <div class="controls">
+                                    <input type="text" class="input-small" placeholder="tag" value="{cnt:chars}" />
+                                    <a href="{?tagBody}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="semTagBodies" rel="oa:hasBody" class="controls">
+                            <div resource="?semTagBody" typeof="cnt:ContentAsText dctypes:Text oa:SemanticTag">
+                                <div property="dc:format" content="text/plain" />
+                                <div class="controls">
+                                    <input type="text" placeholder="http://" value="{cnt:chars}" />
+                                    <a href="{?semTagBody}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div id="motivationDiv" class="span4 well well-small">
+                    <div class="control-group">
+                        <label for="motivation" class="control-label">Motivation</label>
+                        <div class="controls">
+                            <select id="motivation" rel="oa:motivatedBy" required="required">
+                                <option resource="?motivation"></option>
+                                <option id="Bookmarking">Bookmarking</option>
+                                <option id="Classifying">Classifying</option>
+                                <option id="Commenting">Commenting</option>
+                                <option id="Highlighting">Highlighting</option>
+                                <option id="Identifying">Identifying</option>
+                                <option id="Tagging">Tagging</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span12">
+                    <div id="submitURLDiv" class="row-fluid">
+                        <div class="span5 well well-small iFrameStretch12">
+                            <div dropzone="link s:text/uri-list" class="control-group" ondrop="onDropURL(event)">
+                                <label class="control-label">Drag and Drop URL</label>
+                                <div id="dropTarget" class="controls">
+                                    <div rel="oa:hasTarget" resource="?dropTarget"></div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="span1">
+                            <h3>OR</h3>
+                        </div>
+                        <div class="span5 well well-small">
+                            <label class="control-label">Enter URL here</label>
+                            <input class="urlSubmit" type="url" placeholder="http://" />
+                        </div>
+                    </div>
+                    <div class="row-fluid">
+                        <div id="targetDisplayDiv" class="initHide well well-small span8 iFrameStretch12">
+                            <div class="row-fluid">
+                                <div class="span10">
+                                    <label class="control-label">Target URL: 
+                                        <button id="highlightButton" onclick="highlight(); return false" class="initHide btn btn-warning"><i class="icon icon-pencil" /></button>
+                                    </label>
+                                </div>
+                                <div class="span2">
+                                    <button id="iframeToggleButton" title="Display resource in iFrame" onclick="toggleiFrame()" class="btn btn-small btn-info" type="button">
+                                        <i id="iframeToggleIcon" class="icon icon-plus-sign icon-white" />
+                                        <span id="iframeToggleSpan">Display</span>
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="span12">
+                                    <p>
+                                        <a id="targetLink"><span id="targetText"></span></a>
+                                        <button id="targetRemove" title="Enter a different target" onclick="clearTargetHandler()" class="btn btn-mini btn-danger" type="button">X</button>
+                                    </p>
+                                    <div id="target" rel="oa:hasTarget" />
+                                </div>
+                            </div>
+                        </div>
+                        <div id="highlightOutput" class="initHide span4 well well-small">
+                            <div class="control-group">
+                                <label for="selection" class="control-label">Highlighted Selection</label>
+                                <div id="selection" class="controls">
+                                    <div id="selectionHash">
+                                        <p><a href="javascript:void(0)" onclick="highlightToggle()"><span id="selectionLink">Show context</span></a></p>
+                                        <input type="text" id="beforeSelection" class="input-medium initHide highlightContext" />
+                                        <input type="text" id="currentSelection" class="input-large" />
+                                        <input type="text" id="afterSelection" class="input-medium initHide highlightContext" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="targetiFrameDiv" class="row-fluid well well-small initHide">
+                        <div class="span12">
+                            <iframe width="100%" height="200px" id="targetiFrame" />
+                        </div>
+                    </div>
+                </div>
+                <div id="relatedDoc" />
+                <div class="row-fluid">
+                    <div class="span12 form-actions">
+                        <button type="submit" class="btn btn-success">Create</button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

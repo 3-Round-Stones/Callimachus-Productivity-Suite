@@ -1,0 +1,23 @@
+#
+# @Cache-Control: 
+# @infer true
+# @view 
+#
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX ical: <http://www.w3.org/2002/12/cal/icaltzd#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+PREFIX gr: <http://purl.org/goodrelations/v1#>
+
+SELECT ?projectsLink ?name ?value {
+    ?projectsLink a <../../../resources/classes/Project>
+        ; rdfs:label ?name .
+
+    ?projectsLink ical:status ?status .
+    ?status skos:prefLabel ?statusLabel .
+     FILTER ( ?statusLabel = "100% Complete" )
+
+    OPTIONAL { ?projectsLink gr:hasCurrencyValue ?value }
+
+}

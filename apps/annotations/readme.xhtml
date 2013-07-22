@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+<head>
+    <title>Open Annotations Framework</title>
+    <link rel="edit-form" href="?edit" />
+    <link rel="comments" href="?discussion" />
+    <link rel="version-history" href="?history" />
+    
+    <link rel="stylesheet" type="text/css" href="../../resources/css/datatables.css" />
+    
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="../../resources/js/datatables.js"></script>
+    <script type="text/javascript" src="js/readme.js"></script>
+</head>
+<body>
+    <h1 align="center">Open Annotations Framework</h1>
+    <h2>Description</h2>
+    <p>
+        Callimachus can allow for the simple annotation of any resource (document or image) with a URL via drag and drop 
+        and iFrames. This annotation follows the <a href="http://www.openannotation.org/spec/core/">Open Annotation data model</a>, 
+        via one of six Open Annotation motivations:
+    </p>
+    <ul>
+        <li>Bookmarking: The most simple type of annotation, saving a Web URL for later reference.</li>
+        <li>Tagging: Via plain textual tags or semantic (URL) tags.</li>
+        <li>Classification: Association of RDF Concepts with a Web resource.</li>
+        <li>Commenting: Arbitrary comments on a Web resource.</li>
+        <li>Identifying: Associating one URL with another (e.g. identifying a location with a Wikipedia page for it).</li>
+        <li>Highlighting: Saving a selection of text from a Web page and optionally commenting upon it. Highlighting only 
+            works for resources local to Callimachus (for now).</li>
+    </ul>
+    <p><a href="/data/annotations/?create=../../productivity-suite/apps/annotations/classes/Annotation">Try creating a new one!</a></p>
+    <h2>Existing Annotations</h2>
+    <div id="table" />
+</body>
+</html>

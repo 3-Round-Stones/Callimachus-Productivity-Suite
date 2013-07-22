@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:calli="http://callimachusproject.org/rdf/2009/framework#"
+    xmlns:nano="http://example.com/nanoSchema/"
+    xmlns:np="http://www.nanopub.org/nschema#">
+<head>
+    <title>Create New Nanopublication</title>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="../js/nanopublication-create.js"></script>
+</head>
+<body>
+    <h1>Create New Nanopublication</h1>
+    <form id="pageForm" method="POST" action="" enctype="application/rdf+xml" typeof="np:Nanopublication"
+            onsubmit="submitHandler(event); return true">
+        <fieldset>
+            <div class="row-fluid">
+                <div class="span10">
+                    <p>By default, nanopublications are assigned a label of the triple being created. 
+                    If you wish to assign a different label, simply click the button next to "Label" below
+                    and enter the desired label.</p>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span4 well well-small">
+                    <div class="control-group">
+                        <h3 for="label" class="control-label">Label <button href="#" onclick="toggleControls(this); return false" class="btn btn-info"><i class="icon icon-white icon-chevron-down" /></button></h3>
+                        <div class="controls hide">
+                            <input type="text" id="label" value="{rdfs:label}" class="auto-expand input-large" autofocus="autofocus" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row-fluid">
+                <div class="span4 well well-small">
+                    <div id="subjectDiv" class="control-group" dropzone="link s:text/uri-list" ondrop="return calli.insertResource(event)">
+                        <h3 for="subject" class="control-label">
+                            Subject <a href="/productivity-suite/apps/nanopubs/concepts/?create=/callimachus/1.0/types/Concept" title="Create a new concept" onclick="calli.createResource(event); return false" class="icon-edit" /> 
+                        </h3>
+                        <div class="controls">
+                            <select id="subject" rel="nano:hasSubject" required="required">
+                                <option>Select a Subject</option>
+                                <option selected="selected" about="?subjectConcept" rev="calli:hasComponent" resource="/productivity-suite/apps/nanopubs/concepts/" property="skos:prefLabel" />
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="span4 well well-small">
+                    <div class="control-group">
+                        <h3 for="predicate" class="control-label">Predicate</h3>
+                        <div class="controls">
+                            <select id="predicate" rel="nano:hasPredicate" required="required">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="span4 well well-small">
+                    <div id="objectDiv" class="control-group" dropzone="link s:text/uri-list" ondrop="return calli.insertResource(event)">
+                        <h3 for="object" class="control-label">
+                            Object <a href="/productivity-suite/apps/nanopubs/concepts/?create=/callimachus/1.0/types/Concept" title="Create a new concept" onclick="return calli.createResource(event)" class="icon-edit" />
+                        </h3>
+                        <div class="controls">
+                            <select id="object" rel="nano:hasObject" required="required">
+                                <option>Select an Object</option>
+                                <option selected="selected" about="?objectConcept" rev="calli:hasComponent" resource="/productivity-suite/apps/nanopubs/concepts/" property="skos:prefLabel" />
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="control-group">
+                    <div class="controls">
+                        <div id="statement" property="np:hasAssertion"></div>
+                    </div>
+                </div>
+                <div class="row-fluid">
+                    <div class="span12">
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-success">Create</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</body>
+</html>

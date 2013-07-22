@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<html xmlns="http://www.w3.org/1999/xhtml"
+    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:ical="http://www.w3.org/2002/12/cal/icaltzd#"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:calli="http://callimachusproject.org/rdf/2009/framework#"
+    xmlns:gr="http://purl.org/goodrelations/v1#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/">
+<head>
+    <title resource="?this">Project: {rdfs:label}</title>
+    <link rel="edit-form" href="?edit" />
+    <link rel="comments" href="?discussion" />
+    <link rel="describedby" href="?describe" />
+    <link rel="version-history" href="?history" />
+    
+    <script>
+        $(document).ready(function() {
+            if ($('#priority').text() == "Priority A") {
+                $('#priLogo').append('<img id="priImage" src="../images/PriorityA.png" />')
+                $('#priority').css({visibility: "hidden"})
+            } else if ($('#priority').text() == "Priority B") {
+                $('#priLogo').append('<img id="priImage" src="../images/PriorityB.png" />')
+                $('#priority').css({visibility: "hidden"})
+            } else if ($('#priority').text() == "Priority C") {
+                $('#priLogo').append('<img id="priImage" src="../images/PriorityC.png" />')
+                $('#priority').css({visibility: "hidden"})
+            }
+        });
+    </script>
+</head>
+<body resource="?this">
+    <h1 id="label">{rdfs:label}</h1>
+    <div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span10">
+                <!--Body content-->
+                <iframe seamless="seamless" class="flex" id="iframe" src="{foaf:isPrimaryTopicOf}?view"></iframe>
+            </div>
+            <div class="span2">
+                <!--Sidebar content-->
+                <h2>Status:</h2>
+                <p><span id="status" rel="ical:status">{skos:prefLabel}</span></p>
+                <br/>
+                <h2>Priority:</h2>
+                <p><div id="priLogo"></div><span id="priority" rel="ical:priority">{skos:prefLabel}</span></p>
+                <h2>Sales value:</h2>
+                <p><span id="value">{gr:hasCurrencyValue}</span></p>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

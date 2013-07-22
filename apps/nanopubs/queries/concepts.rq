@@ -1,0 +1,17 @@
+#
+# @Cache-Control: 
+# @infer true
+# @view 
+#
+PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+PREFIX calli: <http://callimachusproject.org/rdf/2009/framework#>
+PREFIX skos: <http://www.w3.org/2004/02/skos/core#>
+
+SELECT ?concept ?label {
+    </rdf/2013/nanopub/concepts/> calli:hasComponent ?concept .
+
+    ?concept a skos:Concept
+        ; skos:prefLabel ?label .
+} ORDER BY ?label
