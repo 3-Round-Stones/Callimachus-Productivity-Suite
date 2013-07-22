@@ -30,6 +30,8 @@ The Nanopublications application implements the concept of nanopublications in C
 
 The Sales Pipeline application implements a basic sales pipeline for a small business.  It allows one to create entries and track their status over time.  This application may move to the Callimachus sample applications distribution.
 
+We are evaluating whether each Callimachus sample application should have its own GitHub repo.
+
 ### Task Manager
 
 The Task Manager application provides a way for individuals to track tasks assigned to them and for others to view those tasks.
