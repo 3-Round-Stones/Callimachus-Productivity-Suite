@@ -34,3 +34,7 @@ The Sales Pipeline application implements a basic sales pipeline for a small bus
 
 The Task Manager application provides a way for individuals to track tasks assigned to them and for others to view those tasks.
 
+## Data Storage
+
+The resources that are created by these applications should be stored in a separate directory so that the applications can be updated without effecting the underlying data. 
+
