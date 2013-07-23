@@ -16,157 +16,193 @@
 <body>
     <h1>New Person</h1>
     <form method="POST" action="" enctype="application/rdf+xml" typeof="foaf:Person vcard:Individual"
-            onsubmit="return calli.saveResourceAs(event,calli.slugify($('#label').val()))">
+            onsubmit="return calli.saveResourceAs(event,calli.slugify($('#givenName').val() + ' ' + $('#familyName').val()))">
         <fieldset>
-            <div class="row-fluid">
-                <div class="span4">
-                    <h2>Personal</h2>
-                    <div class="control-group">
-                        <label for="givenName" class="control-label">Given Name</label>
-                        <div class="controls">
-                            <input type="text" id="givenName" value="{foaf:givenName}" class="auto-expand" required="required" autofocus="autofocus" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="familyName" class="control-label">Family Name</label>
-                        <div class="controls">
-                            <input type="text" id="familyName" value="{foaf:familyName}" class="auto-expand" required="required" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="nickName" class="control-label">Nick Name <a href="javascript:void(0)" title="Add nickname"
-                            onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
-                        <div class="controls initHide">
-                            <input type="text" id="nickName" value="{foaf:nick}" class="auto-expand" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="bday" class="control-label">Birthday <a href="javascript:void(0)" title="Add birthday"
-                            onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
-                        <div id="bday" class="controls initHide">
-                            <input type="date" id="birthday" value="{foaf:birthday}" class="auto-expand" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="homeAdr" class="control-label">Home Address <a href="javascript:void(0)" title="Another Address"
-                            onclick="return calli.addResource(event,'#homeAdr')" class="ui-icon ui-icon-plus" /></label>
-                        <div id="homeAdr" rel="vcard:hasAddress" class="controls">
-                            <div typeof="vcard:Home" class="initHide">
-                                <input type="text" placeholder="street address" value="{vcard:street-address}" />
-                                <input type="text" placeholder="po box" value="{vcard:post-office-box}" />
-                                <input type="text" placeholder="locality" value="{vcard:locality}" />
-                                <input type="text" placeholder="postal code" value="{vcard:postalCode}" />
-                                <input type="text" placeholder="country" value="{vcard:country}" />
-                                <input type="text" placeholder="time zone" value="{vcard:hasTimeZone}" />
-                                <a href="{?homeAdr}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+            <div id="content">
+                <div class="tabbable tabs-top">
+                    <ul class="nav nav-tabs" id="personTabs">
+                        <li class="active"><a href="#personal" data-toggle="tab"><i class="icon icon-user" /> Personal</a></li>
+                        <li><a href="#contact" data-toggle="tab"><i class="icon icon-envelope" /> Contact</a></li>
+                        <li><a href="#occupational" data-toggle="tab"><i class="icon icon-folder-open" /> Occupational</a></li>
+                    </ul>
+                    <div class="tab-content row-fluid">
+                        <div class="tab-pane active row-fluid" id="personal">
+                            <div class="row-fluid">
+                                <div class="control-group span6">
+                                    <label for="givenName" class="control-label">Full Name</label>
+                                    <div class="controls">
+                                        <input class="span4 auto-expand" type="text" id="givenName" value="{foaf:givenName}" placeholder="First name" required="required" autofocus="autofocus" />
+                                        <input class="span6 auto-expand" type="text" id="familyName" value="{foaf:familyName}" placeholder="Last name" required="required" />
+                                    </div>
+                                </div>
+                                <div class="control-group span3">
+                                    <label for="nickName" class="control-label">Nick Name <a href="javascript:void(0)" title="Add nickname"
+                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                    <div class="controls initHide">
+                                        <input class="span10 auto-expand" type="text" id="nickName" value="{foaf:nick}" placeholder="Joe" />
+                                    </div>
+                                </div>
+                                <div class="control-group span3">
+                                    <label for="bday" class="control-label">Birthday <a href="javascript:void(0)" title="Add birthday"
+                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                    <div id="bday" class="controls initHide">
+                                        <input class="span10 auto-expand" type="date" id="birthday" value="{foaf:birthday}" datatype="xsd:date" />
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="control-group">
+                                    <label for="homeAdr" class="control-label">Home Address <a href="javascript:void(0)" title="Another Address"
+                                        onclick="return calli.addResource(event,'#homeAdr')" class="ui-icon ui-icon-plus" /></label>
+                                    <div id="homeAdr" rel="vcard:hasAddress" class="controls span4">
+                                        <div typeof="vcard:Home" class="well well-small initHide">
+                                            <input type="text" placeholder="Street Address" value="{vcard:street-address}" />
+                                            <input type="text" placeholder="PO Box" value="{vcard:post-office-box}" />
+                                            <input type="text" placeholder="Locality" value="{vcard:locality}" />
+                                            <input type="text" placeholder="State" value="{vcard:region}" />
+                                            <input type="number" step="1" placeholder="Postal Code" value="{vcard:postalCode}" />
+                                            <input type="text" placeholder="Country" value="{vcard:country}" />
+                                            <input type="text" placeholder="Time Zone (+hh:mm)" value="{vcard:hasTimeZone}" />
+                                            <a href="{?homeAdr}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                        <div class="tab-pane row-fluid" id="contact">
+                            <div class="row-fluid">
+                                <div class="control-group span4">
+                                    <h3>Telephone</h3>
+                                    <label for="workPhone" class="control-label">Work Phone <a href="javascript:void(0)" title="Another Work Phone Number"
+                                        onclick="return calli.addResource(event,'#workPhone')" class="ui-icon ui-icon-plus" /></label>
+                                    <div id="workPhone" rel="vcard:hasTelephone" class="controls">
+                                        <div typeof="vcard:Work" class="initHide">
+                                            <div class="input-prepend input-append">
+                                                <span class="add-on"><i class="icon icon-briefcase" /></span>
+                                                <input type="tel" id="workPhoneNum" value="{vcard:telephone}" placeholder="(123) 456-7890" class="auto-expand" />
+                                                <span class="add-on"><a href="{?workPhone}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label for="personalPhone" class="control-label">Personal Phone <a href="javascript:void(0)" title="Another Personal Phone Number"
+                                        onclick="return calli.addResource(event,'#personalPhone')" class="ui-icon ui-icon-plus" /></label>
+                                    <div id="personalPhone" rel="vcard:hasTelephone" class="controls">
+                                        <div typeof="vcard:Work" class="initHide">
+                                            <div class="input-prepend input-append">
+                                                <span class="add-on"><i class="icon icon-home" /></span>
+                                                <input type="tel" id="personalPhoneNum" value="{vcard:telephone}" placeholder="(123) 456-7890" class="auto-expand" />
+                                                <span class="add-on"><a href="{?personalPhone}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group span4">
+                                    <h3>Email</h3>
+                                    <label for="workEmail" class="control-label">Work Email <a href="javascript:void(0)" title="Another Work Email"
+                                        onclick="return calli.addResource(event,'#workEmail')" class="ui-icon ui-icon-plus" /></label>
+                                    <div id="workEmail" rel="vcard:hasEmail" class="controls">
+                                        <div typeof="vcard:Work" class="initHide">
+                                            <div class="input-prepend input-append">
+                                                <span class="add-on"><i class="icon icon-briefcase" /></span>
+                                                <input type="email" id="workEmailAdr" value="{vcard:email}" placeholder="joebloggs@work.example.com" class="auto-expand" />
+                                                <span class="add-on"><a href="{?workEmail}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <label for="personalEmail" class="control-label">Personal Email <a href="javascript:void(0)" title="Another Personal Email"
+                                        onclick="return calli.addResource(event,'#personalEmail')" class="ui-icon ui-icon-plus" /></label>
+                                    <div id="personalEmail" rel="vcard:hasEmail" class="controls">
+                                        <div typeof="vcard:Home" class="initHide">
+                                            <div class="input-prepend input-append">
+                                                <span class="add-on"><i class="icon icon-home" /></span>
+                                                <input type="email" id="personalEmailAdr" value="{vcard:email}" placeholder="joebloggs@example.com" class="auto-expand" />
+                                                <span class="add-on"><a href="{?personalEmail}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" /></span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group span4">
+                                    <h3>Accounts</h3>
+                                    <label for="account" class="control-label">Online Account <a href="javascript:void(0)" title="Another Online Account"
+                                        onclick="return calli.addResource(event,'#account')" class="ui-icon ui-icon-plus" /></label>
+                                    <div id="account" rel="foaf:account" class="controls">
+                                        <div typeof="foaf:OnlineAccount" class="well well-small initHide">
+                                            <p>Account URL: <input type="url" placeholder="http://" value="{foaf:accountServiceHomepage}" /></p>
+                                            <p>Account Type: 
+                                            <select id="accountName" rel="foaf:accountName">
+                                                <option>Select an account type</option>
+                                                <option selected="selected" about="?concept" rev="calli:hasComponent" resource="../concepts/online-accounts/" property="skos:prefLabel" />
+                                            </select>
+                                            <a href="{?account}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div class="control-group">
+                                        <label for="calliAccount" class="control-label">Callimachus Account <a href="javascript:void(0)" title="Add Callimachus Account"
+                                            onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                        <div id="calliAccount" class="controls initHide">
+                                            <label class="radio" rel="foaf:account" resource="?calliAccount">
+                                                <input type="radio" name="calliAcc" checked="checked" />
+                                                <span rev="calli:hasComponent" resource="/auth/digest-users/" property="rdfs:label" />
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- Close .row-fluid -->
+                        </div> <!-- Close #contact tab pane -->
+                        <div class="tab-pane row-fluid" id="occupational">
+                            <div class="row-fluid">
+                                <div class="control-group span4">
+                                    <label for="jobTitle" class="control-label">Job Title <a href="javascript:void(0)" title="Add job title"
+                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                    <div class="controls initHide">
+                                        <input type="text" id="jobTitle" value="{vcard:hasTitle}" placeholder="Software Developer" class="auto-expand" />
+                                    </div>
+                                </div>
+                                <div class="control-group span4">
+                                    <label for="department" class="control-label">Department <a href="javascript:void(0)" title="Add department"
+                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                    <div rel="org:memberOf" class="controls  initHide">
+                                        <div typeof="org:OrganizationalUnit">
+                                            <input type="text" id="department" value="{skos:prefLabel}" placeholder="Research and Development" class="auto-expand" />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="control-group span4">
+                                    <label for="company" class="control-label">Company <a href="javascript:void(0)" title="Add company"
+                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                    <div rel="org:memberOf" class="controls initHide">
+                                        <div typeof="org:Organization">
+                                            <input type="text" id="company" value="{skos:prefLabel}" placeholder="Example Company" class="auto-expand" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row-fluid">
+                                <div class="control-group">
+                                    <label for="workAdr" class="control-label">Work Address <a href="javascript:void(0)" title="Add Another Work Address"
+                                        onclick="return calli.addResource(event,'#workAdr')" class="ui-icon ui-icon-plus" /></label>
+                                    <div id="workAdr" rel="vcard:hasAddress" class="controls span4">
+                                        <div typeof="vcard:Work" class="well well-small initHide">
+                                            <input type="text" placeholder="Street Address" value="{vcard:street-address}" />
+                                            <input type="text" placeholder="PO Box" value="{vcard:post-office-box}" />
+                                            <input type="text" placeholder="Locality" value="{vcard:locality}" />
+                                            <input type="text" placeholder="State" value="{vcard:region}" />
+                                            <input type="number" step="1" placeholder="Postal Code" value="{vcard:postalCode}" />
+                                            <input type="text" placeholder="Country" value="{vcard:country}" />
+                                            <input type="text" placeholder="Time Zone (+hh:mm)" value="{vcard:hasTimeZone}" />
+                                            <a href="{?workAdr}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div> <!-- Close .row-fluid -->
+                        </div> <!-- Close #occupational tab pane -->
+                    </div> <!-- Close .tab-content -->
+                </div> <!-- Close .tabbable -->
+                <div class="form-actions">
+                    <button type="submit" class="btn btn-success">Create</button>
                 </div>
-                <div class="span4">
-                    <h2>Contact</h2>
-                    <div class="control-group">
-                        <label for="workPhone" class="control-label">Work Phone <a href="javascript:void(0)" title="Another Work Phone Number"
-                            onclick="return calli.addResource(event,'#workPhone')" class="ui-icon ui-icon-plus" /></label>
-                        <div id="workPhone" rel="vcard:hasTelephone" class="controls">
-                            <div typeof="vcard:Work" class="initHide">
-                                <input type="text" id="workPhoneNum" value="{vcard:telephone}" class="auto-expand" />
-                                <a href="{?workPhone}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="personalPhone" class="control-label">Personal Phone <a href="javascript:void(0)" title="Another Personal Phone Number"
-                            onclick="return calli.addResource(event,'#personalPhone')" class="ui-icon ui-icon-plus" /></label>
-                        <div id="personalPhone" rel="vcard:hasTelephone" class="controls">
-                            <div typeof="vcard:Work" class="initHide">
-                                <input type="text" id="personalPhoneNum" value="{vcard:telephone}" class="auto-expand" />
-                                <a href="{?personalPhone}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="workEmail" class="control-label">Work Email <a href="javascript:void(0)" title="Another Work Email"
-                            onclick="return calli.addResource(event,'#workEmail')" class="ui-icon ui-icon-plus" /></label>
-                        <div id="workEmail" rel="vcard:hasEmail" class="controls">
-                            <div typeof="vcard:Work" class="initHide">
-                                <input type="text" id="workEmailAdr" value="{vcard:email}" class="auto-expand" />
-                                <a href="{?workEmail}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="personalEmail" class="control-label">Personal Email <a href="javascript:void(0)" title="Another Personal Email"
-                            onclick="return calli.addResource(event,'#personalEmail')" class="ui-icon ui-icon-plus" /></label>
-                        <div id="personalEmail" rel="vcard:hasEmail" class="controls">
-                            <div typeof="vcard:Home" class="initHide">
-                                <input type="text" id="personalEmailAdr" value="{vcard:email}" class="auto-expand" />
-                                <a href="{?personalEmail}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="account" class="control-label">Online Account <a href="javascript:void(0)" title="Another Online Account"
-                            onclick="return calli.addResource(event,'#account')" class="ui-icon ui-icon-plus" /></label>
-                        <div id="account" rel="foaf:account" class="controls">
-                            <div typeof="foaf:OnlineAccount" class="initHide">
-                                <p>Account URL: <input type="url" placeholder="http://" value="{foaf:accountServiceHomepage}" /></p>
-                                <p>Account Type: <select id="accountName" rel="foaf:accountName">
-                                        <option selected="selected" about="?concept" rev="calli:hasComponent" resource="../concepts/online-accounts/" property="skos:prefLabel" />
-                                    </select>
-                                    <a href="{?account}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="span4">
-                    <h2>Occupational</h2>
-                    <div class="control-group">
-                        <label for="jobTitle" class="control-label">Job Title <a href="javascript:void(0)" title="Add job title"
-                            onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
-                        <div class="controls initHide">
-                            <input type="text" id="jobTitle" value="{vcard:hasTitle}" class="auto-expand" />
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="department" class="control-label">Department <a href="javascript:void(0)" title="Add department"
-                            onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
-                        <div rel="org:memberOf" class="controls  initHide">
-                            <div typeof="org:OrganizationalUnit">
-                                <input type="text" id="department" value="{skos:prefLabel}" class="auto-expand" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="company" class="control-label">Company <a href="javascript:void(0)" title="Add company"
-                            onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
-                        <div rel="org:memberOf" class="controls initHide">
-                            <div typeof="org:Organization">
-                                <input type="text" id="company" value="{skos:prefLabel}" class="auto-expand" />
-                            </div>
-                        </div>
-                    </div>
-                    <div class="control-group">
-                        <label for="workAdr" class="control-label">Work Address <a href="javascript:void(0)" title="Add Another Work Address"
-                            onclick="return calli.addResource(event,'#workAdr')" class="ui-icon ui-icon-plus" /></label>
-                        <div id="workAdr" rel="vcard:hasAddress" class="controls">
-                            <div typeof="vcard:Work" class="initHide">
-                                <input type="text" placeholder="street address" value="{vcard:street-address}" />
-                                <input type="text" placeholder="po box" value="{vcard:post-office-box}" />
-                                <input type="text" placeholder="locality" value="{vcard:locality}" />
-                                <input type="text" placeholder="postal code" value="{vcard:postalCode}" />
-                                <input type="text" placeholder="country" value="{vcard:country}" />
-                                <input type="text" placeholder="time zone" value="{vcard:hasTimeZone}" />
-                                <a href="{?workAdr}" title="Remove" onclick="return calli.removeResource(event)" class="ui-icon ui-icon-close" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="form-actions">
-                <button type="submit" class="btn btn-success">Create</button>
-            </div>
+            </div> <!-- Close #content -->
         </fieldset>
     </form>
 </body>
