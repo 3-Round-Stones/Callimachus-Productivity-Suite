@@ -2,15 +2,82 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#">
+    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+    xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/"
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:calli="http://callimachusproject.org/rdf/2009/framework#"
+    xmlns:org="http://www.w3.org/ns/org#">
 <head>
-    <title resource="?this">{rdfs:label}</title>
+    <title resource="?this">{foaf:givenName} {foaf:familyName}</title>
     <link rel="edit-form" href="?edit" />
     <link rel="comments" href="?discussion" />
     <link rel="version-history" href="?history" />
+    
+    <link rel="stylesheet" type="text/css" href="../css/person-view.css" />
 </head>
 <body resource="?this">
-    <h1 property="rdfs:label" />
-    <pre class="wiki" property="rdfs:comment" />
+    <h1>{foaf:givenName} {foaf:familyName} ({foaf:nick})</h1>
+    <div id="sidebar"> 
+        <aside>
+            <h3>Tasks <a href="javascript:void(0)"><i class="icon icon-plus" /></a></h3>
+        </aside>
+        <aside>
+            <h3>Events <a href="javascript:void(0)"><i class="icon icon-plus" /></a></h3>
+        </aside>
+        <aside>
+            <h3>Annotations <a href="javascript:void(0)"><i class="icon icon-plus" /></a></h3>
+        </aside>
+        <aside>
+            <h3>NanoPublications <a href="javascript:void(0)"><i class="icon icon-plus" /></a></h3>
+        </aside>
+    </div>
+    <div id="content">
+        <div class="row-fluid">
+            <h3><i class="icon icon-user" /> Profile</h3>
+            <div class="row-fluid">
+                <div class="span4">
+                    <img src="{foaf:depiction}" />
+                </div>
+                <div class="span8">
+                    <p><i class="icon icon-calendar" /> <span class="field-header">Birthday:</span> {foaf:birthday}</p>
+                    <p><i class="icon icon-bell" /> <span class="field-header">Phone:</span>
+                        <ul>
+                            <li rel="vcard:hasTelephone" typeof="vcard:Work">Work: {vcard:telephone}</li>
+                            <li rel="vcard:hasTelephone" typeof="vcard:Home">Personal: {vcard:telephone}</li>
+                        </ul>
+                    </p>
+                    <p><i class="icon icon-envelope" /> <span class="field-header">Email:</span>
+                        <ul>
+                            <li rel="vcard:hasEmail" typeof="vcard:Work">Work: {vcard:email}</li>
+                            <li rel="vcard:hasEmail" typeof="vcard:Home">Personal: {vcard:email}</li>
+                        </ul>
+                    </p>
+                </div>
+            </div>
+            <hr/>
+            <div class="row-fluid">
+                <div class="span6">
+                    <h3><i class="icon icon-wrench" /> Accounts</h3>
+                    <div rel="foaf:account" resource="?calliAccount" typeof="calli:User">
+                        <p><span class="field-header">Callimachus:</span> {?calliAccount}</p>
+                    </div>
+                    <div rel="foaf:account" resource="onlineAccount" typeof="foaf:OnlineAccount">
+                        <p><span class="field-header">{foaf:accountName}</span> {foaf:accountServiceHomepage}</p>
+                    </div>
+                </div>
+                <div class="span6">
+                    <h3><i class="icon icon-briefcase" /> Occupational</h3>
+                    <p><span class="field-header">Job Title:</span> {vcard:hasTitle}</p>
+                    <div rel="org:memberOf" resource="?department" typeof="org:OrganizationalUnit">
+                        <p><span class="field-header">Department:</span> {?department}</p>
+                    </div>
+                    <div rel="org:memberOf" resource="?company" typeof="org:Organization">
+                        <p><span class="field-header">Company:</span> {?company}</p>
+                    </div>
+                </div>
+            </div>
+        </div> <!-- Close containing .row-fluid div -->
+    </div> <!-- Close #content div -->
 </body>
 </html>

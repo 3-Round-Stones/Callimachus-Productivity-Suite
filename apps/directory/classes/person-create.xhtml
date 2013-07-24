@@ -16,7 +16,7 @@
 <body>
     <h1>New Person</h1>
     <form method="POST" action="" enctype="application/rdf+xml" typeof="foaf:Person vcard:Individual"
-            onsubmit="return calli.saveResourceAs(event,calli.slugify($('#givenName').val() + ' ' + $('#familyName').val()))">
+            onsubmit="submitHandler(event);">
         <fieldset>
             <div id="content">
                 <div class="tabbable tabs-top">
@@ -55,7 +55,7 @@
                                     <label for="homeAdr" class="control-label">Home Address <a href="javascript:void(0)" title="Another Address"
                                         onclick="return calli.addResource(event,'#homeAdr')" class="ui-icon ui-icon-plus" /></label>
                                     <div id="homeAdr" rel="vcard:hasAddress" class="controls span4">
-                                        <div typeof="vcard:Home" class="well well-small initHide">
+                                        <div id="homeAddrTypeDiv" typeof="vcard:Home" class="well well-small initHide">
                                             <input type="text" placeholder="Street Address" value="{vcard:street-address}" />
                                             <input type="text" placeholder="PO Box" value="{vcard:post-office-box}" />
                                             <input type="text" placeholder="Locality" value="{vcard:locality}" />
@@ -87,7 +87,7 @@
                                     <label for="personalPhone" class="control-label">Personal Phone <a href="javascript:void(0)" title="Another Personal Phone Number"
                                         onclick="return calli.addResource(event,'#personalPhone')" class="ui-icon ui-icon-plus" /></label>
                                     <div id="personalPhone" rel="vcard:hasTelephone" class="controls">
-                                        <div typeof="vcard:Work" class="initHide">
+                                        <div typeof="vcard:Home" class="initHide">
                                             <div class="input-prepend input-append">
                                                 <span class="add-on"><i class="icon icon-home" /></span>
                                                 <input type="tel" id="personalPhoneNum" value="{vcard:telephone}" placeholder="(123) 456-7890" class="auto-expand" />
