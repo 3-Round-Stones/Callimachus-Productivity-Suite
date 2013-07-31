@@ -32,20 +32,19 @@
                                     <label for="givenName" class="control-label">Full Name</label>
                                     <div class="controls">
                                         <input class="span4 auto-expand" type="text" id="givenName" value="{foaf:givenName}" placeholder="First name" required="required" autofocus="autofocus" />
-                                        <input class="span6 auto-expand" type="text" id="familyName" value="{foaf:familyName}" placeholder="Last name" required="required" />
+                                        <input class="span6 auto-expand" type="text" id="familyName" value="{foaf:familyName}" placeholder="Last name" required="required" /> 
+                                        <div id="fullName" property="foaf:name"></div>
                                     </div>
                                 </div>
                                 <div class="control-group span3">
-                                    <label for="nickName" class="control-label">Nick Name <a href="javascript:void(0)" title="Add nickname"
-                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
-                                    <div class="controls initHide">
+                                    <label for="nickName" class="control-label">Nick Name</label>
+                                    <div class="controls">
                                         <input class="span10 auto-expand" type="text" id="nickName" value="{foaf:nick}" placeholder="Joe" />
                                     </div>
                                 </div>
                                 <div class="control-group span3">
-                                    <label for="bday" class="control-label">Birthday <a href="javascript:void(0)" title="Add birthday"
-                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
-                                    <div id="bday" class="controls initHide">
+                                    <label for="bday" class="control-label">Birthday</label>
+                                    <div id="bday" class="controls">
                                         <input class="span10 auto-expand" type="date" id="birthday" value="{foaf:birthday}" datatype="xsd:date" />
                                     </div>
                                 </div>
@@ -55,7 +54,7 @@
                                     <label for="homeAdr" class="control-label">Home Address <a href="javascript:void(0)" title="Another Address"
                                         onclick="return calli.addResource(event,'#homeAdr')" class="ui-icon ui-icon-plus" /></label>
                                     <div id="homeAdr" rel="vcard:hasAddress" class="controls span4">
-                                        <div id="homeAddrTypeDiv" typeof="vcard:Home" class="well well-small initHide">
+                                        <div id="homeAddrTypeDiv" typeof="vcard:Home" class="well well-small">
                                             <input type="text" placeholder="Street Address" value="{vcard:street-address}" />
                                             <input type="text" placeholder="PO Box" value="{vcard:post-office-box}" />
                                             <input type="text" placeholder="Locality" value="{vcard:locality}" />
@@ -76,7 +75,7 @@
                                     <label for="workPhone" class="control-label">Work Phone <a href="javascript:void(0)" title="Another Work Phone Number"
                                         onclick="return calli.addResource(event,'#workPhone')" class="ui-icon ui-icon-plus" /></label>
                                     <div id="workPhone" rel="vcard:hasTelephone" class="controls">
-                                        <div typeof="vcard:Work" class="initHide">
+                                        <div typeof="vcard:Work">
                                             <div class="input-prepend input-append">
                                                 <span class="add-on"><i class="icon icon-briefcase" /></span>
                                                 <input type="tel" id="workPhoneNum" value="{vcard:telephone}" placeholder="(123) 456-7890" class="auto-expand" />
@@ -87,7 +86,7 @@
                                     <label for="personalPhone" class="control-label">Personal Phone <a href="javascript:void(0)" title="Another Personal Phone Number"
                                         onclick="return calli.addResource(event,'#personalPhone')" class="ui-icon ui-icon-plus" /></label>
                                     <div id="personalPhone" rel="vcard:hasTelephone" class="controls">
-                                        <div typeof="vcard:Home" class="initHide">
+                                        <div typeof="vcard:Home">
                                             <div class="input-prepend input-append">
                                                 <span class="add-on"><i class="icon icon-home" /></span>
                                                 <input type="tel" id="personalPhoneNum" value="{vcard:telephone}" placeholder="(123) 456-7890" class="auto-expand" />
@@ -101,7 +100,7 @@
                                     <label for="workEmail" class="control-label">Work Email <a href="javascript:void(0)" title="Another Work Email"
                                         onclick="return calli.addResource(event,'#workEmail')" class="ui-icon ui-icon-plus" /></label>
                                     <div id="workEmail" rel="vcard:hasEmail" class="controls">
-                                        <div typeof="vcard:Work" class="initHide">
+                                        <div typeof="vcard:Work">
                                             <div class="input-prepend input-append">
                                                 <span class="add-on"><i class="icon icon-briefcase" /></span>
                                                 <input type="email" id="workEmailAdr" value="{vcard:email}" placeholder="joebloggs@work.example.com" class="auto-expand" />
@@ -112,7 +111,7 @@
                                     <label for="personalEmail" class="control-label">Personal Email <a href="javascript:void(0)" title="Another Personal Email"
                                         onclick="return calli.addResource(event,'#personalEmail')" class="ui-icon ui-icon-plus" /></label>
                                     <div id="personalEmail" rel="vcard:hasEmail" class="controls">
-                                        <div typeof="vcard:Home" class="initHide">
+                                        <div typeof="vcard:Home">
                                             <div class="input-prepend input-append">
                                                 <span class="add-on"><i class="icon icon-home" /></span>
                                                 <input type="email" id="personalEmailAdr" value="{vcard:email}" placeholder="joebloggs@example.com" class="auto-expand" />
@@ -126,7 +125,7 @@
                                     <label for="account" class="control-label">Online Account <a href="javascript:void(0)" title="Another Online Account"
                                         onclick="return calli.addResource(event,'#account')" class="ui-icon ui-icon-plus" /></label>
                                     <div id="account" rel="foaf:account" class="controls">
-                                        <div typeof="foaf:OnlineAccount" class="well well-small initHide">
+                                        <div typeof="foaf:OnlineAccount" class="well well-small">
                                             <p>Account URL: <input type="url" placeholder="http://" value="{foaf:accountServiceHomepage}" /></p>
                                             <p>Account Type: 
                                             <select id="accountName" rel="foaf:accountName">
@@ -138,9 +137,8 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label for="calliAccount" class="control-label">Callimachus Account <a href="javascript:void(0)" title="Add Callimachus Account"
-                                            onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
-                                        <div id="calliAccount" class="controls initHide">
+                                        <label for="calliAccount" class="control-label">Callimachus Account</label>
+                                        <div id="calliAccount" class="controls">
                                             <label class="radio" rel="foaf:account" resource="?calliAccount">
                                                 <input type="radio" name="calliAcc" checked="checked" />
                                                 <span rev="calli:hasComponent" resource="/auth/digest-users/" property="rdfs:label" />
@@ -153,25 +151,22 @@
                         <div class="tab-pane row-fluid" id="occupational">
                             <div class="row-fluid">
                                 <div class="control-group span4">
-                                    <label for="jobTitle" class="control-label">Job Title <a href="javascript:void(0)" title="Add job title"
-                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
-                                    <div class="controls initHide">
+                                    <label for="jobTitle" class="control-label">Job Title</label>
+                                    <div class="controls">
                                         <input type="text" id="jobTitle" value="{vcard:hasTitle}" placeholder="Software Developer" class="auto-expand" />
                                     </div>
                                 </div>
                                 <div class="control-group span4">
-                                    <label for="department" class="control-label">Department <a href="javascript:void(0)" title="Add department"
-                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
-                                    <div rel="org:memberOf" class="controls  initHide">
+                                    <label for="department" class="control-label">Department</label>
+                                    <div rel="org:memberOf" class="controls">
                                         <div typeof="org:OrganizationalUnit">
                                             <input type="text" id="department" value="{skos:prefLabel}" placeholder="Research and Development" class="auto-expand" />
                                         </div>
                                     </div>
                                 </div>
                                 <div class="control-group span4">
-                                    <label for="company" class="control-label">Company <a href="javascript:void(0)" title="Add company"
-                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
-                                    <div rel="org:memberOf" class="controls initHide">
+                                    <label for="company" class="control-label">Company</label>
+                                    <div rel="org:memberOf" class="controls">
                                         <div typeof="org:Organization">
                                             <input type="text" id="company" value="{skos:prefLabel}" placeholder="Example Company" class="auto-expand" />
                                         </div>
@@ -183,7 +178,7 @@
                                     <label for="workAdr" class="control-label">Work Address <a href="javascript:void(0)" title="Add Another Work Address"
                                         onclick="return calli.addResource(event,'#workAdr')" class="ui-icon ui-icon-plus" /></label>
                                     <div id="workAdr" rel="vcard:hasAddress" class="controls span4">
-                                        <div typeof="vcard:Work" class="well well-small initHide">
+                                        <div typeof="vcard:Work" class="well well-small">
                                             <input type="text" placeholder="Street Address" value="{vcard:street-address}" />
                                             <input type="text" placeholder="PO Box" value="{vcard:post-office-box}" />
                                             <input type="text" placeholder="Locality" value="{vcard:locality}" />

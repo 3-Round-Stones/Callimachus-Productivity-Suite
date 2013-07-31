@@ -182,6 +182,8 @@ function submitHandler(event) {
     // Retrieve relevant values from page
     var slug = calli.slugify($('#label').val());
     var source = $("#targetiFrame").attr('src');
+    var user = calli.getUserIri();
+    $("#creator").attr('content', '<' + user + '>');
 
     // Collect appropriate motivation value and save
     var selected = $("#motivation").find("option:selected");

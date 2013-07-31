@@ -7,7 +7,8 @@
     xmlns:vcard="http://www.w3.org/2006/vcard/ns#"
     xmlns:gr="http://purl.org/goodrelations/v1#"
     xmlns:cal="http://www.w3.org/2002/12/cal/icaltzd#"
-    xmlns:skos="http://www.w3.org/2004/02/skos/core#">
+    xmlns:skos="http://www.w3.org/2004/02/skos/core#"
+    xmlns:foaf="http://xmlns.com/foaf/0.1/">
 <head>
     <title>Create New Event</title>
 </head>
@@ -105,7 +106,7 @@
                     <div id="attendees" class="controls">
                         <label class="checkbox" rel="cal:attendee" resource="?concept">
                             <input type="checkbox" name="attendees" checked="checked" />
-                            <span rev="calli:hasComponent" resource="/auth/digest-users/" property="rdfs:label" />
+                            <span rev="calli:hasComponent" resource="/data/people/" property="foaf:name" />
                         </label>
                     </div>
                 </div>

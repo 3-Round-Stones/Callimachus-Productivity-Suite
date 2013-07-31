@@ -7,7 +7,8 @@
     xmlns:foaf="http://xmlns.com/foaf/0.1/"
     xmlns:skos="http://www.w3.org/2004/02/skos/core#"
     xmlns:calli="http://callimachusproject.org/rdf/2009/framework#"
-    xmlns:org="http://www.w3.org/ns/org#">
+    xmlns:org="http://www.w3.org/ns/org#"
+    xmlns:ical="http://www.w3.org/2002/12/cal/icaltzd#">
 <head>
     <title resource="?this">{foaf:givenName} {foaf:familyName}</title>
     <link rel="edit-form" href="?edit" />
@@ -20,37 +21,53 @@
     <h1>{foaf:givenName} {foaf:familyName} ({foaf:nick})</h1>
     <div id="sidebar"> 
         <aside>
-            <h3>Tasks <a href="javascript:void(0)"><i class="icon icon-plus" /></a></h3>
+            <h4><i class="icon icon-pencil" /> Tasks <a href="javascript:void(0)"><span class="header-link"><i class="icon icon-plus" /></span></a></h4>
+            <ul rev="foaf:currentProject" resource="?task">
+                <li><a href="?task">{rdfs:label}</a></li>
+            </ul>
         </aside>
         <aside>
-            <h3>Events <a href="javascript:void(0)"><i class="icon icon-plus" /></a></h3>
+            <h4><i class="icon icon-plane" /> Events <a href="javascript:void(0)"><span class="header-link"><i class="icon icon-plus" /></span></a></h4>
+            <ul rev="ical:attendee" resource="?event">
+                <li><a href="?event">{rdfs:label}</a></li>
+            </ul>
         </aside>
         <aside>
-            <h3>Annotations <a href="javascript:void(0)"><i class="icon icon-plus" /></a></h3>
+            <h4><i class="icon icon-bookmark" /> Annotations <a href="javascript:void(0)"><span class="header-link"><i class="icon icon-plus" /></span></a></h4>
         </aside>
         <aside>
-            <h3>NanoPublications <a href="javascript:void(0)"><i class="icon icon-plus" /></a></h3>
+            <h4><i class="icon icon-book" /> NanoPublications <a href="javascript:void(0)"><span class="header-link"><i class="icon icon-plus" /></span></a></h4>
         </aside>
     </div>
     <div id="content">
         <div class="row-fluid">
             <h3><i class="icon icon-user" /> Profile</h3>
             <div class="row-fluid">
-                <div class="span4">
-                    <img src="{foaf:depiction}" />
+                <div rel="foaf:account" class="span4">
+                    <div resource="?calliAccountPhoto" typeof="calli:User">
+                        <img src="{foaf:depiction}" />
+                    </div>
                 </div>
                 <div class="span8">
                     <p><i class="icon icon-calendar" /> <span class="field-header">Birthday:</span> {foaf:birthday}</p>
                     <p><i class="icon icon-bell" /> <span class="field-header">Phone:</span>
                         <ul>
-                            <li rel="vcard:hasTelephone" typeof="vcard:Work">Work: {vcard:telephone}</li>
-                            <li rel="vcard:hasTelephone" typeof="vcard:Home">Personal: {vcard:telephone}</li>
+                            <div rel="vcard:hasTelephone">
+                                <li resource="?workTel" typeof="vcard:Work">Work: {vcard:telephone}</li>
+                            </div>
+                            <div rel="vcard:hasTelephone">
+                                <li resource="?homeTel" typeof="vcard:Home">Personal: {vcard:telephone}</li>
+                            </div>
                         </ul>
                     </p>
                     <p><i class="icon icon-envelope" /> <span class="field-header">Email:</span>
                         <ul>
-                            <li rel="vcard:hasEmail" typeof="vcard:Work">Work: {vcard:email}</li>
-                            <li rel="vcard:hasEmail" typeof="vcard:Home">Personal: {vcard:email}</li>
+                            <div rel="vcard:hasEmail">
+                                <li resource="?workEmail" typeof="vcard:Work">Work: <a href="mailto:{vcard:email}">{vcard:email}</a></li>
+                            </div>
+                            <div rel="vcard:hasEmail">
+                                <li resource="?homeEmail" typeof="vcard:Home">Personal: <a href="mailto:{vcard:email}">{vcard:email}</a></li>
+                            </div>
                         </ul>
                     </p>
                 </div>
@@ -59,21 +76,29 @@
             <div class="row-fluid">
                 <div class="span6">
                     <h3><i class="icon icon-wrench" /> Accounts</h3>
-                    <div rel="foaf:account" resource="?calliAccount" typeof="calli:User">
-                        <p><span class="field-header">Callimachus:</span> {?calliAccount}</p>
+                    <div rel="foaf:account">
+                        <div resource="?calliAccount" typeof="calli:User">
+                            <p><a href="?calliAccount"><span class="field-header">Callimachus</span></a></p>
+                        </div>
                     </div>
-                    <div rel="foaf:account" resource="onlineAccount" typeof="foaf:OnlineAccount">
-                        <p><span class="field-header">{foaf:accountName}</span> {foaf:accountServiceHomepage}</p>
+                    <div rel="foaf:account">
+                        <div resource="?onlineAccount" typeof="foaf:OnlineAccount">
+                            <p><a href="{foaf:accountServiceHomepage}"><span rel="foaf:accountName" class="field-header">{skos:prefLabel}</span></a></p>
+                        </div>
                     </div>
                 </div>
                 <div class="span6">
                     <h3><i class="icon icon-briefcase" /> Occupational</h3>
                     <p><span class="field-header">Job Title:</span> {vcard:hasTitle}</p>
-                    <div rel="org:memberOf" resource="?department" typeof="org:OrganizationalUnit">
-                        <p><span class="field-header">Department:</span> {?department}</p>
+                    <div rel="org:memberOf">
+                        <div resource="?department" typeof="org:OrganizationalUnit">
+                            <p><span class="field-header">Department:</span> {?department}</p>
+                        </div>
                     </div>
-                    <div rel="org:memberOf" resource="?company" typeof="org:Organization">
-                        <p><span class="field-header">Company:</span> {?company}</p>
+                    <div rel="org:memberOf">
+                        <div resource="?company" typeof="org:Organization">
+                            <p><span class="field-header">Company:</span> {skos:prefLabel}</p>
+                        </div>
                     </div>
                 </div>
             </div>

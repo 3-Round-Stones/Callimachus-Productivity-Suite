@@ -9,10 +9,10 @@
     xmlns:calli="http://callimachusproject.org/rdf/2009/framework#"
     xmlns:org="http://www.w3.org/ns/org#">
 <head>
-    <title resource="?this">{rdfs:label}</title>
+    <title resource="?this">{foaf:familyName}, {foaf:givenName}</title>
 </head>
 <body resource="?this">
-    <h1 property="rdfs:label" />
+    <h1>{foaf:familyName}, {foaf:givenName}</h1>
     <form method="POST" action="" enctype="application/sparql-update" resource="?this">
         <fieldset>
             <div id="content">
@@ -33,15 +33,13 @@
                                     </div>
                                 </div>
                                 <div class="control-group span3">
-                                    <label for="nickName" class="control-label">Nick Name <a href="javascript:void(0)" title="Add nickname"
-                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                    <label for="nickName" class="control-label">Nick Name</label>
                                     <div class="controls initHide">
                                         <input class="span10 auto-expand" type="text" id="nickName" value="{foaf:nick}" placeholder="Joe" />
                                     </div>
                                 </div>
                                 <div class="control-group span3">
-                                    <label for="bday" class="control-label">Birthday <a href="javascript:void(0)" title="Add birthday"
-                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                    <label for="bday" class="control-label">Birthday</label>
                                     <div id="bday" class="controls initHide">
                                         <input class="span10 auto-expand" type="date" id="birthday" value="{foaf:birthday}" datatype="xsd:date" />
                                     </div>
@@ -135,8 +133,7 @@
                                         </div>
                                     </div>
                                     <div class="control-group">
-                                        <label for="calliAccount" class="control-label">Callimachus Account <a href="javascript:void(0)" title="Add Callimachus Account"
-                                            onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                        <label for="calliAccount" class="control-label">Callimachus Account</label>
                                         <div id="calliAccount" class="controls initHide">
                                             <label class="radio" rel="foaf:account" resource="?calliAccount">
                                                 <input type="radio" name="calliAcc" checked="checked" />
@@ -150,15 +147,13 @@
                         <div class="tab-pane row-fluid" id="occupational">
                             <div class="row-fluid">
                                 <div class="control-group span4">
-                                    <label for="jobTitle" class="control-label">Job Title <a href="javascript:void(0)" title="Add job title"
-                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                    <label for="jobTitle" class="control-label">Job Title</label>
                                     <div class="controls initHide">
                                         <input type="text" id="jobTitle" value="{vcard:hasTitle}" placeholder="Software Developer" class="auto-expand" />
                                     </div>
                                 </div>
                                 <div class="control-group span4">
-                                    <label for="department" class="control-label">Department <a href="javascript:void(0)" title="Add department"
-                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                    <label for="department" class="control-label">Department</label>
                                     <div rel="org:memberOf" class="controls  initHide">
                                         <div typeof="org:OrganizationalUnit">
                                             <input type="text" id="department" value="{skos:prefLabel}" placeholder="Research and Development" class="auto-expand" />
@@ -166,8 +161,7 @@
                                     </div>
                                 </div>
                                 <div class="control-group span4">
-                                    <label for="company" class="control-label">Company <a href="javascript:void(0)" title="Add company"
-                                        onclick="toggleInput(this)" class="icon icon-chevron-down" /></label>
+                                    <label for="company" class="control-label">Company</label>
                                     <div rel="org:memberOf" class="controls initHide">
                                         <div typeof="org:Organization">
                                             <input type="text" id="company" value="{skos:prefLabel}" placeholder="Example Company" class="auto-expand" />

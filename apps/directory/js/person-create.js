@@ -1,8 +1,8 @@
-$(document).ready(function() {
-    $(".initHide").hide();
-});
+//$(document).ready(function() { });
 
 function submitHandler(event) {
+    // Create full name triple
+    $("#fullName").attr('content', $("#givenName").val() + ' ' + $("#familyName").val());
     $(".controls").each(function( groupIndex ) {
         var group = $(this);
         var empty = true;
@@ -11,8 +11,8 @@ function submitHandler(event) {
             if ($(this).attr('type') == "text" || $(this).attr('type') == "date" || $(this).attr('type') == "number" 
                 || $(this).attr('type') == "tel" || $(this).attr('type') == "email" || $(this).attr('type') == "url") {
                 if ($(this).val()) {
-                    alert('Group: ' + groupIndex + '. Input: ' + inputIndex + '. Has value: ' + $(this).val() + ' and ID: ' + $(this).attr('id'));
                     empty = false;
+                    //alert('Group: ' + groupIndex + '. Input: ' + inputIndex + '. Has value: ' + $(this).val() + ' and ID: ' + $(this).attr('id'));
                 }
             } else if ($(this).attr('type') == "radio") {
                 if ($(this).checked) {
@@ -21,7 +21,6 @@ function submitHandler(event) {
             }
         });
         if (empty == true) {
-            alert('Emptying group: ' + groupIndex);
             group.empty();
         }
     });
