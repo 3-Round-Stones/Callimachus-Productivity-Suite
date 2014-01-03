@@ -22,5 +22,5 @@ SELECT ?projectsLink ?name ?priorityLabel ?statusLabel ?value {
 
     OPTIONAL { ?projectsLink gr:hasCurrencyValue ?value }
 
-    FILTER ( ?status != "100% Complete" )
+    FILTER ( ?statusLabel != "100% Complete" )
 }
